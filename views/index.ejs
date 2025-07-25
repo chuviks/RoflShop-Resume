@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазин футболок</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/uploads/icon.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <%- include('partials/nav') %>
+    <div class="container">
+      <section class="hero">
+        <h1 style="color: white;">Найди свою идеальную футболку!</h1>
+        <p>Стильные и удобные футболки для любого случая</p>
+        <a href="/contact" class="cta-button">Связаться с нами</a>
+      </section>
+      <section class="info-block">
+        <h2>О нашем магазине</h2>
+        <p>Наш магазин предлагает широкий выбор стильных футболок для всех возрастов и вкусов. Используйте удобные
+          фильтры по цвету и размеру, чтобы найти идеальную модель. Зарегистрированные пользователи могут управлять
+          ассортиментом через админ-панель: добавлять, редактировать и удалять футболки. Свяжитесь с нами, чтобы узнать
+          больше!</p>
+        <button class="hide-info-button" onclick="hideInfoBlock()">Скрыть</button>
+      </section>
+      <div class="filters">
+        <select id="colorFilter">
+          <option value="">Все цвета</option>
+          <option value="Синий">Синий</option>
+          <option value="Красный">Красный</option>
+          <option value="Белый">Белый</option>
+          <option value="Зелёный">Зелёный</option>
+          <option value="Оранжевый">Оранжевый</option>
+          <option value="Коричневый">Коричневый</option>
+          <option value="Черный">Черный</option>
+        </select>
+        <select id="sizeFilter">
+          <option value="">Все размеры</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+      </div>
+      <div class="tshirt-list">
+        <% if (tshirts && tshirts.length> 0) { %>
+          <% tshirts.forEach(tshirt=> { %>
+            <div class="tshirt-card" data-color="<%= tshirt.color %>" data-size="<%= tshirt.size %>">
+              <img src="<%= tshirt.image || '/uploads/default.jpg' %>" alt="<%= tshirt.name %>" class="tshirt-image">
+              <h3>
+                <%= tshirt.name %>
+              </h3>
+              <p>Цена: $<%= tshirt.price %>
+              </p>
+              <p>Цвет: <%= tshirt.color %>
+              </p>
+              <p>Размер: <%= tshirt.size %>
+              </p>
+              <button class="tshirt-button">Подробнее</button>
+            </div>
+            <% }) %>
+              <% } else { %>
+                <p>Футболки не найдены</p>
+                <% } %>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

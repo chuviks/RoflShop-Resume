@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Панель администратора</title>
+  <link rel="icon" href="/uploads/icon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <%- include('partials/nav') %>
+    <div class="container">
+      <h1>Панель администратора</h1>
+      <div class="admin-controls">
+        <button onclick="showSection('add')">Добавить футболку</button>
+        <button onclick="showSection('edit')">Редактировать футболку</button>
+        <button onclick="showSection('delete')">Удалить футболку</button>
+      </div>
+      <div id="add-section" class="admin-section" style="display: none;">
+        <h2>Добавить новую футболку</h2>
+        <form id="add-form" enctype="multipart/form-data">
+          <input type="text" name="name" placeholder="Название" required>
+          <input type="number" name="price" placeholder="Цена" step="0.01" required>
+          <input type="text" name="color" placeholder="Цвет" required>
+          <input type="text" name="size" placeholder="Размер" required>
+          <input type="file" name="image" accept="image/jpeg,image/png,image/gif">
+          <button type="submit">Добавить</button>
+        </form>
+      </div>
+      <div id="edit-section" class="admin-section" style="display: none;">
+        <h2>Редактировать футболку</h2>
+        <% if (tshirts && tshirts.length> 0) { %>
+          <div class="tshirt-list">
+            <% tshirts.forEach(tshirt=> { %>
+              <div class="tshirt-card">
+                <img src="<%= tshirt.image || '/uploads/default.jpg' %>" alt="<%= tshirt.name %>" class="tshirt-image">
+                <h3>
+                  <%= tshirt.name %>
+                </h3>
+                <p>Цена: $<%= tshirt.price %>
+                </p>
+                <p>Цвет: <%= tshirt.color %>
+                </p>
+                <p>Размер: <%= tshirt.size %>
+                </p>
+                <button onclick="editTshirt('<%= tshirt._id %>')">Редактировать</button>
+              </div>
+              <% }) %>
+          </div>
+          <% } else { %>
+            <p>Нет футболок для редактирования</p>
+            <% } %>
+              <form id="edit-form" enctype="multipart/form-data" style="display: none;">
+                <input type="hidden" name="id">
+                <input type="text" name="name" placeholder="Название" required>
+                <input type="number" name="price" placeholder="Цена" step="0.01" required>
+                <input type="text" name="color" placeholder="Цвет" required>
+                <input type="text" name="size" placeholder="Размер" required>
+                <input type="file" name="image" accept="image/jpeg,image/png,image/gif">
+                <button type="submit">Сохранить</button>
+              </form>
+      </div>
+      <div id="delete-section" class="admin-section" style="display: none;">
+        <h2>Удалить футболку</h2>
+        <% if (tshirts && tshirts.length> 0) { %>
+          <div class="tshirt-list">
+            <% tshirts.forEach(tshirt=> { %>
+              <div class="tshirt-card">
+                <img src="<%= tshirt.image || '/uploads/default.jpg' %>" alt="<%= tshirt.name %>" class="tshirt-image">
+                <h3>
+                  <%= tshirt.name %>
+                </h3>
+                <button onclick="deleteTshirt('<%= tshirt._id %>')">Удалить</button>
+              </div>
+              <% }) %>
+          </div>
+          <% } else { %>
+            <p>Нет футболок для удаления</p>
+            <% } %>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

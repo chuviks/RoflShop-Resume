@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Авторизация</title>
+  <link rel="icon" href="/uploads/icon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <%- include('partials/nav') %>
+    <div class="container">
+      <h1>Авторизация</h1>
+      <form id="login-form" class="auth-form">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <button type="submit">Войти</button>
+      </form>
+      <div class="register-link">
+        <button onclick="showRegister()" class="register-button">Зарегистрироваться</button>
+      </div>
+      <div id="register-section" style="display: none;">
+        <h1>Регистрация</h1>
+        <form id="register-form" class="auth-form">
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="password" name="password" placeholder="Пароль" required>
+          <button type="submit">Создать аккаунт</button>
+        </form>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
